@@ -1,0 +1,35 @@
+" set statusline="  %t%= %A %10u:%-7g %15E %20d  "
+
+only
+" set viewcolumns=*{name}..,16{mtime},7{}.
+
+" unzip
+filetype *.zip unzip %c -d %c_unpacked
+
+" block devices
+" filetype *.devlink mkdir %c && sudo mount %c
+filetype *.devlink mkdir ~/dev/%f:r && sudo mount -o umask=000 /dev/%f:r ~/dev/%f:r && vifm ~/dev/%f:r 
+
+" vscode
+filetype *.code-workspace code
+
+" juce
+filetype *.jucer /usr/bin/projucer
+
+" Images
+filetype *.jpg,*.jpeg,*.gif,*.tif,*.png,*.bmp firefox
+
+" Media
+filetype *.mp3,*.wav,*.webm,*.flv,*.avi,*.mpeg,*.mpg,*.mov,*.ogg,*.ogv,*.mkv,*.m4a,*.m3u,*.aac,*.aif,*.aiff,*.flac,*.wma vlc %f
+
+filetype *.mp4,*.mov,*.MOV vlc
+
+" Web
+" filetype *.html,*.htm,*.shtml /home/jason/Scripts/vimprobtab.sh
+filetype *.html,*.htm,*.shtml elinks 
+
+" PDF
+filetype *.pdf zathura
+
+nnoremap Q :quit<cr>
+
