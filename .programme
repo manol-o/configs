@@ -1,0 +1,87 @@
+Pakete unten
+
+=======================================================
+Silent BOOT
+{
+To hide fsck messages during boot, let systemd check the root filesystem. For this, replace udev hook with systemd:
+
+HOOKS=( base systemd fsck ...) 
+in /etc/mkinitcpio.conf and then run:
+
+mkinitcpio -p linux
+Now edit systemd-fsck-root.service and systemd-fsck@.service:
+
+# systemctl edit --full systemd-fsck-root.service
+# systemctl edit --full systemd-fsck@.service
+Configuring StandardOutput and StandardError like this:
+
+(...)
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/systemd/systemd-fsck
+StandardOutput=null
+StandardError=journal+console
+TimeoutSec=0
+}
+
+in vim /boot/loader/entries/arch-uefi.conf:
+=======================================================
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=/dev/mmcblk0p5 rw quiet splash
+=======================================================
+
+
+ntfs-3g
+baobab
+xterm
+openbox
+xorg-server
+xorg-xinit
+xsel
+visual-studio-code
+git
+grml-zsh-config
+zsh-syntax-highlighting 
+xsel
+elinks
+openbox
+xterm
+tmux
+alsa-lib
+dialog 
+sudo 
+terminus-font 
+vifm 
+zsh 
+gdb
+# for battery in tmux taskbar
+acpi
+
+slim
+
+# for visual-studio-code^AUR:
+# built from https://aur.archlinux.org/visual-studio-code-bin.git
+libxtst  gtk2  python  alsa-lib  nss  libnotify  libxss  gconf gnu-free-fonts gdb
+
+
+acpi
+expac #for nxor_listpackages...
+pkg-config
+fakeroot
+git
+#for plymotuh 
+make
+docbook-xsl
+
+
+vlc
+qjackctl
+jack2
+gmrun #for windows + r run
+tint2
+lxappearence # for setting thunar etc background
+arc-gtk-theme
